@@ -1,7 +1,7 @@
 # mapf-web-db-migration-bin
 A set of scripts for converting existing non-encoded data into run-length encoded data given read access to one database and write access to another of a specific configuration
 
-## .env Template
+## `.env` template
 ```bash
 MONGO_OLD_URI=$SECRET
 MONGO_OLD_DB=test
