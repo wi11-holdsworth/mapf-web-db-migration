@@ -11,8 +11,11 @@ def mathOriginToPixelOrigin(solution_path: str) -> str:
 
 
 def encodeRLE(solution_path: str) -> str:
-    return ''.join([f'{count if (count := len(list(g))) > 1 else ''}{char}' 
-                    for char, g in groupby(solution_path)])
+    out: str = ""
+    for char, g in groupby(solution_path):
+        num = len(list(g))
+        out += (str(num) if num > 1 else '') + char
+    return out
 
 
 def streamDocs(fromCol, toCol, **kwargs) -> None:
