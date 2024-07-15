@@ -5,9 +5,17 @@ set -a
 source .env
 set +a
 
-# for small small collections
-./bin/dump.sh
-./bin/load.sh
+# we only want to dump small collections
+echo $MONGO_SMALL_COLLECTIONS
+# IFS=':' read -ra collections <<< "$MONGO_SMALL_COLLECTIONS"
 
-# for large collections
-poetry run python3 bin/main.py
+# # dump all records from each collection
+# for collection in "${collections[@]}"; do
+#     mongodump --uri=$MONGO_OLD_URI --db=$MONGO_OLD_DB -c=$collection
+# done
+
+# # upload all small collections
+# mongorestore --uri=$MONGO_NEW_URI --nsFrom="$MONGO_OLD_DB.*" --nsTo="$MONGO_NEW_DB.*"
+
+# # for large collections
+# poetry run python3 bin/main.py
