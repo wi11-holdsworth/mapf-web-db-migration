@@ -1,0 +1,31 @@
+import re
+from itertools import groupby
+from tqdm import tqdm
+
+
+BATCH_SIZE = 10000
+    
+
+def mathOriginToPixelOrigin(solution_path: str) -> str:
+    return re.sub(r'u', 'd', solution_path)
+
+
+def encodeRLE(solution_path: str) -> str:
+    return ''.join([f'{count if (count := len(list(g))) > 1 else ''}{char}' 
+                    for char, g in groupby(solution_path)])
+
+
+def streamDocs(fromCol, toCol, **kwargs) -> None:
+    cursor = fromCol.find({}, batch_size=BATCH_SIZE)
+    num_docs: int = fromCol.count_documents({})
+
+    for doc in tqdm(cursor, desc=toCol.name, total=num_docs):
+        for attrib, func in kwargs.items():
+            try:
+                doc[attrib] = func(doc[attrib])
+            except:
+                pass
+
+        toCol.insert_one(doc)
+
+    cursor.close()
