@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 # we only want to dump small collections
 IFS=':' read -ra collections <<< "$MONGO_SMALL_COLLECTIONS"

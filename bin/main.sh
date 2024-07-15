@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # all config is in the environment variables
 set -a
