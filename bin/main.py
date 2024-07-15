@@ -13,9 +13,9 @@ newDb = MongoClient(os.getenv('MONGO_NEW_URI'))[os.getenv('MONGO_NEW_DB')]
 # TODO: make these env variables??
 
 creation_opts = {
-    # TODO: uncomment for real
-    'solution_paths': {}, # { 'storageEngine': { 'wiredTiger': { 'configString': 'block_compressor=zstd', } } },
+    'solution_paths': { 'storageEngine': { 'wiredTiger': { 'configString': 'block_compressor=zstd', } } },
     'instances': {},
+    'submissions': {},
 }
 
 stream_opts = {
