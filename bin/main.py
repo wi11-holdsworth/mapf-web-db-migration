@@ -24,4 +24,4 @@ stream_opts = {
 
 for collection_name in os.getenv('MONGO_LARGE_COLLECTIONS').split(":"):
     newDb.create_collection(collection_name, **creation_opts[collection_name])
-    streamDocs(oldDb[collection_name], newDb[collection_name], **stream_opts)
+    streamDocs(oldDb[collection_name], newDb[collection_name]) #**stream_opts)
