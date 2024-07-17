@@ -20,7 +20,7 @@ def encodeRLE(solution_path: str) -> str:
 
 def streamDocs(fromCol, toCol, **kwargs) -> None:
     cursor = fromCol.find({}, batch_size=BATCH_SIZE)
-    num_docs: int = fromCol.count_documents({})
+    num_docs: int = fromCol.estimated_document_count({})
 
     for doc in tqdm(cursor, desc=toCol.name, total=num_docs):
         for attrib, func in kwargs.items():
